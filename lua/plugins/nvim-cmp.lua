@@ -3,6 +3,7 @@ return {
   event = "InsertEnter",
   dependencies = { 
     { "hrsh7th/cmp-buffer" },
+	{ "hrsh7th/cmp-nvim-lsp" },
     { "saadparwaiz1/cmp_luasnip" },
     { "L3MON4D3/LuaSnip" },
     { "rafamadriz/friendly-snippets" }, 
@@ -30,6 +31,7 @@ return {
 	  ["<CR>"] = cmp.mapping.confirm({ select = true }), -- 補完確定 (現在選択中の候補を使用)
 	  }),
 	  sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
 	    { name = "luasnip", priority_weight = 20 }, -- LuaSnip を補完候補に含める
 	    }, {
 	    { name = "buffer" }, -- バッファの内容を補完候補に含める
