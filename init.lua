@@ -1,7 +1,10 @@
 vim.o.number = true
 vim.o.clipboard = "unnamedplus"
 vim.o.cursorline = true
-
+vim.opt.mouse = 'a'
+vim.scriptencoding = 'utf-8'
+vim.opt.encoding = 'utf-8'
+vim.opt.fileencoding = 'utf-8'
 
 if vim.fn.has("persistent_undo") == 1 then
   vim.o.undodir = vim.fn.expand("~/.vim/undo")
