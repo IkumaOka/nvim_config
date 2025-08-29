@@ -22,6 +22,30 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- hover 時にフォーカスされないようにする関数
+local function hover_no_focus(bufnr)
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
+  if #clients == 0 then return end
+  local client = clients[1]
+
+  local params = vim.lsp.util.make_position_params(0, client.offset_encoding)
+  vim.lsp.buf_request(bufnr, "textDocument/hover", params, function(err, result, ctx, _)
+    if err or not (result and result.contents) then return end
+
+    local markdown_lines = vim.lsp.util.convert_input_to_markdown_lines(result.contents)
+    markdown_lines = vim.lsp.util.trim_empty_lines(markdown_lines)
+
+    if vim.tbl_isempty(markdown_lines) then return end
+
+    -- フォーカスを奪わない hover
+    vim.lsp.util.open_floating_preview(
+      markdown_lines,
+      "markdown",
+      { focus = false, focusable = false, border = "rounded" }
+    )
+  end)
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local bufnr = args.buf
@@ -31,7 +55,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "K", function() hover_no_focus(bufnr) end, opts)
     vim.keymap.set('n', 'oe', vim.diagnostic.open_float, opts)
     vim.keymap.set('n', 'g]', vim.diagnostic.goto_next, opts)
     vim.keymap.set('n', 'g[', vim.diagnostic.goto_prev, opts)
@@ -41,11 +65,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
       buffer = bufnr,
       callback = function()
         vim.diagnostic.open_float(nil, {
-          focusable = false, -- ESCで消さなくていい
+          focusable = false,
           close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
           border = "rounded",
-          source = "if_many", -- エラーソース表示
-          prefix = "", -- プレフィックスなし
+          source = "if_many",
+          prefix = "",
           scope = "cursor",
         })
       end
@@ -55,7 +79,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.api.nvim_create_autocmd("CursorHoldI", {
       buffer = bufnr,
       callback = function()
-        vim.lsp.buf.hover()
+        hover_no_focus(bufnr)
       end
     })
   end,
