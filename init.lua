@@ -48,6 +48,17 @@ local function hover_no_focus(bufnr)
     end)
 end
 
+-- ダイアログが開いてるかを確認する関数
+local function has_any_floating_window()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        local config = vim.api.nvim_win_get_config(win)
+        if config.relative ~= "" then
+            return true
+        end
+    end
+    return false
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
         local bufnr = args.buf
@@ -59,12 +70,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
         vim.keymap.set("n", "K", function() hover_no_focus(bufnr) end, opts)
         vim.keymap.set('n', 'oe', function()
-            vim.diagnostic.open_float(nil, {
+            local _, winid = vim.diagnostic.open_float(nil, {
                 focus = true,
                 border = "rounded",
-                close_events = { "BufLeave", "InsertEnter", "FocusLost"
+                close_events = { "InsertEnter", "FocusLost"
                 },
             })
+            if winid and vim.api.nvim_win_is_valid(winid) then
+                vim.api.nvim_set_current_win(winid)
+            end
         end, opts)
         vim.keymap.set('n', 'g]', vim.diagnostic.goto_next, opts)
         vim.keymap.set('n', 'g[', vim.diagnostic.goto_prev, opts)
@@ -73,7 +87,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.api.nvim_create_autocmd("CursorHold", {
             buffer = bufnr,
             callback = function()
-                if vim.api.nvim_win_get_config(0).relative ~= "" then
+                if has_any_floating_window() then
                     return
                 end
                 vim.diagnostic.open_float(nil, {
