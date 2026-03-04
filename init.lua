@@ -43,7 +43,7 @@ local function hover_no_focus(bufnr)
         vim.lsp.util.open_floating_preview(
             markdown_lines,
             "markdown",
-            { focus = false, focusable = false, border = "rounded" }
+            { focus = false, focusable = true, border = "rounded" }
         )
     end)
 end
@@ -58,7 +58,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
         vim.keymap.set("n", "K", function() hover_no_focus(bufnr) end, opts)
-        vim.keymap.set('n', 'oe', vim.diagnostic.open_float, opts)
+        vim.keymap.set('n', 'oe', function()
+            vim.diagnostic.open_float(nil, {
+                focus = true,
+                border = "rounded",
+                close_events = { "BufLeave", "InsertEnter", "FocusLost"
+                },
+            })
+        end, opts)
         vim.keymap.set('n', 'g]', vim.diagnostic.goto_next, opts)
         vim.keymap.set('n', 'g[', vim.diagnostic.goto_prev, opts)
 
@@ -66,8 +73,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.api.nvim_create_autocmd("CursorHold", {
             buffer = bufnr,
             callback = function()
+                if vim.api.nvim_win_get_config(0).relative ~= "" then
+                    return
+                end
                 vim.diagnostic.open_float(nil, {
                     focusable = false,
+                    focus = false,
                     close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
                     border = "rounded",
                     source = "if_many",
