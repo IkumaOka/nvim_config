@@ -5,6 +5,8 @@ require('lazy').setup({
         { import = "plugins.nvim-lspconfig" },
         { import = "plugins.nvim-cmp" },
         { import = "plugins.nvim-autopairs" },
-        { import = "plugins.bufferline" }
+        { import = "plugins.bufferline" },
+        { import = "plugins.nvim-treesitter" },
+        { import = "plugins.tokyonight" }
     },
 })
