@@ -12,6 +12,9 @@ vim.o.expandtab = true
 
 vim.o.termguicolors = true
 
+-- pyファイルの起動が遅い時に使う。which python の結果を貼る。
+-- vim.g.python3_host_prog = "/Users/ikuma.oka/.pyenv/arm64/shims/python"
+
 -- nvim-tree や bufferline などの背景も透明にする
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })       -- フォーカスしていないウィンドウ
