@@ -1,5 +1,6 @@
 return {
     "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {},
     dependencies = {
         "williamboman/mason.nvim",
@@ -16,7 +17,6 @@ return {
         }
 
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
-        local lspconfig = require("lspconfig")
 
         -- auto formatting when file saved
         local on_attach = function(client, bufnr)
