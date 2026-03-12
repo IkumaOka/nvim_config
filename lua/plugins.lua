@@ -7,6 +7,7 @@ require('lazy').setup({
         { import = "plugins.nvim-autopairs" },
         { import = "plugins.bufferline" },
         { import = "plugins.nvim-treesitter" },
+        { import = "plugins.sidekick" },
         { import = "plugins.kanagawa" },
         -- { import = "plugins.tokyonight" }
     },
