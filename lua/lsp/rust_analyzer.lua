@@ -2,7 +2,8 @@ return {
     settings = {
         ['rust-analyzer'] = {
             -- 保存時に cargo check を実行する (デフォルトで有効ですが明示)
-            checkOnSave = {
+            checkOnSave = true,
+            check = {
                 command = "clippy", -- cargo check の代わりに clippy を使うとより厳密です
             },
             -- 型ヒント（Inlay Hints）の設定
