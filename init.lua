@@ -119,3 +119,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.o.updatetime = 300
 require("config.lazy")
 require("plugins")
+
+-- Ctrl + h で左側（ツリー）にフォーカス
+vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
+
+-- Ctrl + l で右側（エディタ）にフォーカス
+vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
