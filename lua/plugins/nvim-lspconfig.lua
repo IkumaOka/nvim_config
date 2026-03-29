@@ -20,7 +20,7 @@ return {
 
         -- auto formatting when file saved
         local on_attach = function(client, bufnr)
-            if client.supports_method("textDocument/formatting") then
+            if client:supports_method("textDocument/formatting") then
                 vim.api.nvim_create_autocmd("BufWritePre", {
                     buffer = bufnr,
                     callback = function()
@@ -39,7 +39,13 @@ return {
             if has_custom_opts then
                 opts = vim.tbl_deep_extend("force", opts, custom_opts)
             end
+            local ok, err = pcall(function()
+                vim.lsp.config(server_name, opts)
+            end)
 
+            if not ok then
+                print("Error configuring " .. server_name .. ": " .. err)
+            end
             vim.lsp.config(server_name, opts)
         end
         vim.lsp.enable(ensure_installed)
