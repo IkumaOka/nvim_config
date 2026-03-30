@@ -69,7 +69,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         -- 手動コマンド
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts) -- Quickfix List は :ccl で閉じる
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
         vim.keymap.set("n", "K", function() hover_no_focus(bufnr) end, opts)
         vim.keymap.set('n', 'oe', function()
