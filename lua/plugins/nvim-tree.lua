@@ -21,7 +21,7 @@ return {
         group_empty = true,
       },
       filters = {
-        dotfiles = true,
+        dotfiles = false,
       },
     })
 
@@ -29,4 +29,3 @@ return {
     vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
   end,
 }
-
