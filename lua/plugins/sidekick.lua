@@ -5,6 +5,7 @@ return {
             mux = {
                 backend = "zellij",
                 enabled = true,
+                floating = false,
             },
         },
     },
