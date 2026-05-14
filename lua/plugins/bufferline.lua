@@ -6,6 +6,8 @@ return {
         vim.opt.termguicolors = true
         require("bufferline").setup {
             options = {
+                mode = "tabs",
+                separator_style = "slant",
                 buffer_close_icon = "x",
                 -- nvim-tree を表示している時に上にバッファを表示しないようにする
                 offsets = {

@@ -17,15 +17,39 @@ return {
       view = {
         width = 30,
       },
+      actions = {
+        open_file = {
+          window_picker = {
+            enable = false
+          }
+        }
+      },
       renderer = {
         group_empty = true,
+        indent_markers = {
+          enable = true
+        },
+        icons = {
+          glyphs = {
+            folder = {
+              arrow_closed = "→", -- arrow when folder is arrow_closed
+              arrow_open = "↓", -- arrow when folder is open
+            }
+          }
+        }
       },
       filters = {
         dotfiles = false,
+        custom = { ".DS_Store" }
       },
+      git = {
+        ignore = false
+      }
     })
 
-    -- <leader>e で NvimTree を開閉できるように設定
-    vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
+    vim.keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Find file in explorer" })
+    vim.keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" })
+    vim.keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })
   end,
 }
