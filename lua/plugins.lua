@@ -16,6 +16,8 @@ require('lazy').setup({
     { import = "plugins.lualine" },
     { import = "plugins.dressing" },
     { import = "plugins.vim-maximizer" },
+    { import = "plugins.comment" },
+    { import = "plugins.todo-comments" },
     -- { import = "plugins.tokyonight" }
   },
 })
