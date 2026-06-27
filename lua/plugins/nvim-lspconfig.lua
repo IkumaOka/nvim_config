@@ -18,22 +18,9 @@ return {
 
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-        -- auto formatting when file saved
-        local on_attach = function(client, bufnr)
-            if client:supports_method("textDocument/formatting") then
-                vim.api.nvim_create_autocmd("BufWritePre", {
-                    buffer = bufnr,
-                    callback = function()
-                        vim.lsp.buf.format({ bufnr = bufnr, id = client.id })
-                    end,
-                })
-            end
-        end
-
         for _, server_name in ipairs(ensure_installed) do
             local opts = {
                 capabilities = capabilities,
-                on_attach = on_attach,
             }
             local has_custom_opts, custom_opts = pcall(require, "lsp." .. server_name)
             if has_custom_opts then

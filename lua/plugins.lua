@@ -21,6 +21,8 @@ require('lazy').setup({
     { import = "plugins.substitute" },
     { import = "plugins.nvim-surround" },
     { import = "plugins.trouble" },
+    { import = "plugins.formatting" },
+    { import = "plugins.nvim-lint" },
     -- { import = "plugins.tokyonight" }
   },
 })
