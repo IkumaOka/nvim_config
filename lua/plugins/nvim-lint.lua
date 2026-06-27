@@ -1,5 +1,5 @@
 return {
-  "mfossati/nvim-lint",
+  "mfussenegger/nvim-lint",
   event = { "BufReadPost", "BufWritePost" },
   config = function()
     local lint = require("lint")
