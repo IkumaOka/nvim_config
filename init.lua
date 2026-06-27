@@ -19,6 +19,7 @@ opt.background = "dark"
 opt.signcolumn = "yes"
 opt.splitright = true
 opt.splitbelow = true
+opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- pyファイルの起動が遅い時に使う。which python の結果を貼る。
 -- vim.g.python3_host_prog = "/Users/ikuma.oka/.pyenv/arm64/shims/python"

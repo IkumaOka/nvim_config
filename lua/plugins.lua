@@ -15,6 +15,7 @@ require('lazy').setup({
     { import = "plugins.auto-session" },
     { import = "plugins.lualine" },
     { import = "plugins.dressing" },
+    { import = "plugins.vim-maximizer" },
     -- { import = "plugins.tokyonight" }
   },
 })

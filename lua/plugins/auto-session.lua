@@ -3,8 +3,8 @@ return {
   config = function()
     require("auto-session").setup({
       log_level = "error",
-      auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/", "~/Dev/", "~/Documents" },
-      auto_restore_enabled = false,
+      suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/", "~/Dev/", "~/Documents" },
+      auto_restore = false,
     })
 
     local keymap = vim.keymap

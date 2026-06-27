@@ -4,38 +4,70 @@ return {
   dependencies = {
     { "hrsh7th/cmp-buffer" },
     { "hrsh7th/cmp-nvim-lsp" },
+    { "hrsh7th/cmp-path" },
     { "saadparwaiz1/cmp_luasnip" },
     { "L3MON4D3/LuaSnip" },
     { "rafamadriz/friendly-snippets" },
+    { "onsails/lspkind.nvim" },
   },
   config = function()
     local cmp_autopairs = require("nvim-autopairs.completion.cmp")
     local cmp = require("cmp")
-	cmp.event:on(
-      "confirm_done",
-      cmp_autopairs.on_confirm_done()
-    )
+    local lspkind = require("lspkind")
+    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
     local luasnip = require("luasnip")
     require("luasnip/loaders/from_vscode").lazy_load()
+
     cmp.setup({
-	  snippet = {
-	  expand = function(args)
-		luasnip.lsp_expand(args.body)
-	  end,
-	  },
-	  mapping = cmp.mapping.preset.insert({
-	  ["<C-b>"] = cmp.mapping.scroll_docs(-4), -- 補完候補のドキュメントを上にスクロール
-	  ["<C-f>"] = cmp.mapping.scroll_docs(4), -- 補完候補のドキュメントを下にスクロール
-	  ["<C-Space>"] = cmp.mapping.complete(), -- 手動で補完候補を表示
-	  ["<C-e>"] = cmp.mapping.abort(), -- 補完を中断して閉じる
-	  ["<CR>"] = cmp.mapping.confirm({ select = true }), -- 補完確定 (現在選択中の候補を使用)
-	  }),
-	  sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-	    { name = "luasnip", priority_weight = 20 }, -- LuaSnip を補完候補に含める
-	    }, {
-	    { name = "buffer" }, -- バッファの内容を補完候補に含める
-	  }),
-	})
-  end
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      },
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
+      mapping = cmp.mapping.preset.insert({
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.abort(),
+        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+      }),
+      formatting = {
+        format = lspkind.cmp_format({
+          mode = "symbol_text",
+          maxwidth = 50,
+          ellipsis_char = "...",
+        }),
+      },
+      sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "luasnip", priority = 20 },
+        { name = "path" },
+      }, {
+        { name = "buffer" },
+      }),
+    })
+  end,
 }

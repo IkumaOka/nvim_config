@@ -1,17 +1,19 @@
 return {
     "nvim-treesitter/nvim-treesitter",
-    branch = "master",
+    branch = "main",
     build = ":TSUpdate",
-    -- main を指定すると、ここ（nvim-treesitter.configs）が読み込まれた後に opts が適用されます
-    main = "nvim-treesitter.configs",
-    opts = {
-        ensure_installed = { "python", "lua", "vim", "vimdoc", "bash" },
-        auto_install = true,
-        highlight = {
-            enable = true,
-        },
-        indent = {
-            enable = true,
-        },
-    },
+    config = function()
+        require("nvim-treesitter").setup()
+
+        -- パーサーのインストール（非同期）
+        local parsers = {
+            "python", "lua", "vim", "vimdoc", "bash",
+            "json", "yaml", "toml", "markdown", "markdown_inline",
+            "javascript", "typescript", "rust",
+        }
+        for _, lang in ipairs(parsers) do
+            pcall(require("nvim-treesitter").install, lang)
+        end
+
+    end,
 }
