@@ -19,6 +19,7 @@ require('lazy').setup({
     { import = "plugins.comment" },
     { import = "plugins.todo-comments" },
     { import = "plugins.substitute" },
+    { import = "plugins.nvim-surround" },
     -- { import = "plugins.tokyonight" }
   },
 })
