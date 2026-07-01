@@ -1,7 +1,6 @@
 return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
-    opts = {},
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
@@ -10,7 +9,7 @@ return {
     config = function()
         require("mason").setup()
 
-        local ensure_installed = { 'lua_ls', 'pyright', 'ruff', 'rust_analyzer', 'ts_ls', 'jsonls' }
+        local ensure_installed = { 'lua_ls', 'pyright', 'ruff', 'rust_analyzer', 'ts_ls', 'jsonls', 'ocamllsp' }
         require("mason-lspconfig").setup {
             automatic_installation = true,
             ensure_installed = ensure_installed,
@@ -25,13 +24,6 @@ return {
             local has_custom_opts, custom_opts = pcall(require, "lsp." .. server_name)
             if has_custom_opts then
                 opts = vim.tbl_deep_extend("force", opts, custom_opts)
-            end
-            local ok, err = pcall(function()
-                vim.lsp.config(server_name, opts)
-            end)
-
-            if not ok then
-                print("Error configuring " .. server_name .. ": " .. err)
             end
             vim.lsp.config(server_name, opts)
         end

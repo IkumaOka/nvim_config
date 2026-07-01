@@ -10,7 +10,6 @@ return {
     { "rafamadriz/friendly-snippets" },
     { "onsails/lspkind.nvim" },
     { "hrsh7th/cmp-cmdline" },
-    { "hrsh7th/cmp-nvim-lsp-signature-help" },
   },
   config = function()
     local cmp_autopairs = require("nvim-autopairs.completion.cmp")
@@ -65,7 +64,6 @@ return {
       },
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        { name = "nvim_lsp_signature_help" },
         { name = "luasnip", priority = 20 },
         { name = "path" },
       }, {

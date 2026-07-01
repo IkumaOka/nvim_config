@@ -1,11 +1,13 @@
 require("core.keymaps")
 
+vim.opt.rtp:prepend("/Users/ikuma.oka/.opam/default/share/ocp-indent/vim")
+vim.env.PATH = "/Users/ikuma.oka/.opam/default/bin:" .. vim.env.PATH
+
 local opt = vim.opt
 opt.number = true
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
 opt.mouse = 'a'
-vim.scriptencoding = 'utf-8'
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
 opt.tabstop = 2
@@ -130,8 +132,3 @@ opt.updatetime = 300
 require("config.lazy")
 require("plugins")
 
--- Ctrl + h で左側（ツリー）にフォーカス
-vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
-
--- Ctrl + l で右側（エディタ）にフォーカス
-vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
