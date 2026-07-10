@@ -8,7 +8,6 @@ opt.number = true
 vim.schedule(function() opt.clipboard = "unnamedplus" end)
 opt.cursorline = true
 opt.mouse = 'a'
-opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
 opt.tabstop = 2
 opt.shiftwidth = 2
@@ -26,15 +25,11 @@ opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,te
 -- pyファイルの起動が遅い時に使う。which python の結果を貼る。
 -- vim.g.python3_host_prog = "/Users/ikuma.oka/.pyenv/arm64/shims/python"
 
--- nvim-tree や bufferline などの背景も透明にする
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })       -- フォーカスしていないウィンドウ
-vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" }) -- nvim-tree本体
-vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = "none" })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })    -- 波線(~)の部分
 
 if vim.fn.has("persistent_undo") == 1 then
-  opt.undodir = vim.fn.expand("~/.vim/undo")
+  local undodir = vim.fn.stdpath("data") .. "/undo"
+  vim.fn.mkdir(undodir, "p")
+  opt.undodir = undodir
   opt.undofile = true
 end
 

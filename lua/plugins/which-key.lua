@@ -25,8 +25,6 @@ return {
       { "<leader>f", group = "Find (Telescope)" },
       { "<leader>e", group = "Explorer" },
       { "<leader>b", group = "Buffer" },
-      { "<leader>g", group = "Git" },
-      { "<leader>l", group = "LSP" },
       { "<leader>s", group = "Search" },
       { "<leader>t", group = "Terminal/Toggle" },
       { "<leader>w", group = "Window" },
