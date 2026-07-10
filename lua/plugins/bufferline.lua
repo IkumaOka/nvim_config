@@ -3,7 +3,6 @@ return {
 	version = "*",
 	dependencies = "nvim-tree/nvim-web-devicons",
 	config = function()
-		vim.opt.termguicolors = true
 		require("bufferline").setup({
 			options = {
 				mode = "buffers",
@@ -15,9 +14,7 @@ return {
 				},
 			},
 		})
-		-- Tab で右のバッファへ
-		vim.keymap.set("n", "<Tab>", "<Cmd>BufferLineCycleNext<CR>", { silent = true })
-		-- Shift + Tab で左のバッファへ
-		vim.keymap.set("n", "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", { silent = true })
+		vim.keymap.set("n", "]b", "<Cmd>BufferLineCycleNext<CR>", { silent = true, desc = "Next buffer" })
+		vim.keymap.set("n", "[b", "<Cmd>BufferLineCyclePrev<CR>", { silent = true, desc = "Prev buffer" })
 	end,
 }

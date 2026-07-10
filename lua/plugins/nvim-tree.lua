@@ -1,13 +1,11 @@
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = { "nvim-tree/nvim-web-devicons" },
+  cmd = { "NvimTreeToggle", "NvimTreeFindFileToggle", "NvimTreeCollapse", "NvimTreeRefresh" },
   config = function()
     -- netrw を無効化（nvim-tree の動作を邪魔しないようにする）
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
-
-    -- 24bit カラーを有効化
-    vim.opt.termguicolors = true
 
     -- nvim-tree の設定
     require("nvim-tree").setup({

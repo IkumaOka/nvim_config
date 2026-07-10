@@ -4,7 +4,7 @@ return {
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "hrsh7th/cmp-nvim-lsp",
+        "saghen/blink.cmp",
     },
     config = function()
         require("mason").setup()
@@ -15,7 +15,7 @@ return {
             ensure_installed = ensure_installed,
         }
 
-        local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        local capabilities = require("blink.cmp").get_lsp_capabilities()
 
         for _, server_name in ipairs(ensure_installed) do
             local opts = {

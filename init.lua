@@ -5,7 +5,7 @@ vim.env.PATH = "/Users/ikuma.oka/.opam/default/bin:" .. vim.env.PATH
 
 local opt = vim.opt
 opt.number = true
-opt.clipboard = "unnamedplus"
+vim.schedule(function() opt.clipboard = "unnamedplus" end)
 opt.cursorline = true
 opt.mouse = 'a'
 opt.encoding = 'utf-8'
@@ -114,14 +114,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
           prefix = "",
           scope = "cursor",
         })
-      end
-    })
-
-    -- 自動ポップアップ (Hover, optional)
-    vim.api.nvim_create_autocmd("CursorHoldI", {
-      buffer = bufnr,
-      callback = function()
-        hover_no_focus(bufnr)
       end
     })
   end,

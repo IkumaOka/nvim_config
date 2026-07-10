@@ -30,6 +30,9 @@ return {
       { "<leader>s", group = "Search" },
       { "<leader>t", group = "Terminal/Toggle" },
       { "<leader>w", group = "Window" },
+      { "<leader>h", group = "Hunks (Git)" },
+      { "<leader>d", group = "Debug" },
+      { "<leader>j", group = "Jump (Flash)" },
     })
   end,
 }

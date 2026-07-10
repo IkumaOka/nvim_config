@@ -1,9 +1,10 @@
 require('lazy').setup({
   spec = {
+    { import = "plugins.snacks" },
     { import = "plugins.nvim-tree" },
     { import = "plugins.telescope" },
     { import = "plugins.nvim-lspconfig" },
-    { import = "plugins.nvim-cmp" },
+    { import = "plugins.blink-cmp" },
     { import = "plugins.nvim-autopairs" },
     { import = "plugins.bufferline" },
     { import = "plugins.nvim-treesitter" },
@@ -23,6 +24,10 @@ require('lazy').setup({
     { import = "plugins.trouble" },
     { import = "plugins.formatting" },
     { import = "plugins.nvim-lint" },
+    { import = "plugins.gitsigns" },
+    { import = "plugins.indent-blankline" },
+    { import = "plugins.flash" },
+    { import = "plugins.nvim-dap" },
     -- { import = "plugins.tokyonight" }
   },
 })
