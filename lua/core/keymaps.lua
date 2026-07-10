@@ -21,3 +21,15 @@ keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" 
 keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" })
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" })
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" })
+
+-- save
+keymap.set({ "n", "i", "v" }, "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
+
+-- scroll with cursor centered
+keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
+keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
+keymap.set("n", "n", "nzzzv", { desc = "Next search result centered" })
+keymap.set("n", "N", "Nzzzv", { desc = "Prev search result centered" })
+
+-- paste in visual mode without overwriting the yank register
+keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without overwriting register" })

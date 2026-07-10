@@ -83,6 +83,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gb", "<C-o>", opts)                -- gdで定義ジャンプした後、gbで戻る
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts) -- Quickfix List は :ccl で閉じる
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "LSP: Rename" })
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "LSP: Code Action" })
     vim.keymap.set("n", "K", function() hover_no_focus(bufnr) end, opts)
     vim.keymap.set('n', 'oe', function()
       local _, winid = vim.diagnostic.open_float(nil, {
