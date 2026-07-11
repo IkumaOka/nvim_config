@@ -1,13 +1,15 @@
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = { "nvim-tree/nvim-web-devicons" },
+  event = "VimEnter",
+  keys = {
+    { "<leader>e",  "<cmd>NvimTreeToggle<CR>",         desc = "Toggle file explorer" },
+    { "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", desc = "Find file in explorer" },
+    { "<leader>ec", "<cmd>NvimTreeCollapse<CR>",       desc = "Collapse file explorer" },
+    { "<leader>er", "<cmd>NvimTreeRefresh<CR>",        desc = "Refresh file explorer" },
+  },
   cmd = { "NvimTreeToggle", "NvimTreeFindFileToggle", "NvimTreeCollapse", "NvimTreeRefresh" },
   config = function()
-    -- netrw を無効化（nvim-tree の動作を邪魔しないようにする）
-    vim.g.loaded_netrw = 1
-    vim.g.loaded_netrwPlugin = 1
-
-    -- nvim-tree の設定
     require("nvim-tree").setup({
       sort = {
         sorter = "case_sensitive",
@@ -30,8 +32,8 @@ return {
         icons = {
           glyphs = {
             folder = {
-              arrow_closed = "→", -- arrow when folder is arrow_closed
-              arrow_open = "↓", -- arrow when folder is open
+              arrow_closed = "→",
+              arrow_open = "↓",
             }
           }
         }
@@ -45,9 +47,5 @@ return {
       }
     })
 
-    vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
-    vim.keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Find file in explorer" })
-    vim.keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" })
-    vim.keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })
   end,
 }

@@ -1,3 +1,6 @@
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 require("core.keymaps")
 
 vim.opt.rtp:prepend("/Users/ikuma.oka/.opam/default/share/ocp-indent/vim")
@@ -118,6 +121,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- ホバーや診断表示の遅延時間短縮
 opt.updatetime = 300
+-- ディレクトリ・ファイル引数で起動したときにツリーを自動で開く
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function(data)
+    if vim.fn.isdirectory(data.file) == 1 then
+      vim.cmd.cd(data.file)
+      require("nvim-tree.api").tree.open()
+    elseif vim.fn.filereadable(data.file) == 1 then
+      require("nvim-tree.api").tree.open()
+      vim.cmd("wincmd p")
+    end
+  end,
+})
+
 require("config.lazy")
 require("plugins")
 
