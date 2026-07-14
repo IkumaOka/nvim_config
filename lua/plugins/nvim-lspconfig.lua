@@ -9,7 +9,7 @@ return {
     config = function()
         require("mason").setup()
 
-        local ensure_installed = { 'lua_ls', 'pyright', 'ruff', 'rust_analyzer', 'ts_ls', 'jsonls', 'ocamllsp' }
+        local ensure_installed = { 'gopls', 'lua_ls', 'pyright', 'ruff', 'rust_analyzer', 'ts_ls', 'jsonls', 'ocamllsp' }
         require("mason-lspconfig").setup {
             automatic_installation = true,
             ensure_installed = ensure_installed,
