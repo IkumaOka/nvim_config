@@ -10,7 +10,7 @@ require('lazy').setup({
     { import = "plugins.nvim-treesitter" },
     { import = "plugins.sidekick" },
     { import = "plugins.kanagawa" },
-    { import = "plugins.nvim-tmux-navigator" },
+    { import = "plugins.smart-splits" },
     { import = "plugins.which-key" },
     { import = "plugins.alpha" },
     { import = "plugins.auto-session" },
