@@ -5,6 +5,7 @@ return {
     local lint = require("lint")
 
     lint.linters_by_ft = {
+      go = { "golangci-lint" },
       python = { "ruff" },
       javascript = { "eslint" },
       typescript = { "eslint" },
