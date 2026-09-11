@@ -2,7 +2,15 @@ return {
   "mrjones2014/smart-splits.nvim",
   config = function()
     local ss = require("smart-splits")
-    ss.setup({})
+    -- setup merges via vim.tbl_deep_extend, which merges list-configs by
+    -- index rather than replacing them, so passing {} here would NOT clear
+    -- the plugin's defaults (ignored_buftypes = {nofile,quickfix,prompt},
+    -- ignored_filetypes = {NvimTree}); overwrite each index explicitly so
+    -- nvim-tree (buftype=nofile, filetype=NvimTree) stops being skipped.
+    ss.setup({
+      ignored_buftypes = { "", "quickfix", "prompt" },
+      ignored_filetypes = { "" },
+    })
 
     vim.keymap.set("n", "<C-h>", ss.move_cursor_left)
     vim.keymap.set("n", "<C-j>", ss.move_cursor_down)
