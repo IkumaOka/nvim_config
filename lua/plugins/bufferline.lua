@@ -16,5 +16,7 @@ return {
 		})
 		vim.keymap.set("n", "]b", "<Cmd>BufferLineCycleNext<CR>", { silent = true, desc = "Next buffer" })
 		vim.keymap.set("n", "[b", "<Cmd>BufferLineCyclePrev<CR>", { silent = true, desc = "Prev buffer" })
+		-- Shift + Tab で左のバッファへ (Tab は sidekick.nvim の NES ジャンプが優先、無ければ次のバッファへ)
+		vim.keymap.set("n", "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", { silent = true, desc = "Prev buffer" })
 	end,
 }

@@ -15,11 +15,10 @@ return {
       "<tab>",
       function()
         if not require("sidekick").nes_jump_or_apply() then
-          return "<Tab>"
+          vim.cmd("BufferLineCycleNext")
         end
       end,
-      expr = true,
-      desc = "Goto/Apply Next Edit Suggestion",
+      desc = "Goto/Apply Next Edit Suggestion, or Next Buffer",
     },
     -- メインのトグル操作 (CLI)
     {
